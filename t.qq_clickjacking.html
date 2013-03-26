@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<title>Clickjacking</title>
+</head>
+<style>
+body{
+    margin:0;
+    padding:0;
+}
+button{
+	background:#F0F0F0 repeat-x;
+	padding-top:3px;
+	border-top:1px solid #708090;
+	border-right:1px solid #708090;
+	border-bottom:1px solid #708090;
+	border-left:1px solid #708090; 
+	width:60px;
+	height:23px;
+	font-size:10pt;
+	cursor:hand;
+}
+.dd{
+    position:absolute;
+    z-index:20;
+}
+#d1{
+    width:640px;
+    height:360px;
+    top:85px;
+    left:300px;
+}
+#d2{
+    width:230px;
+    height:23px;
+    top:445px;
+    left:300px;
+    background:black;
+}
+#d3{
+    width:350px;
+    height:23px;
+    top:445px;
+    left:590px;
+
+background:black;
+}
+#d4{
+    width:60px;
+    height:23px;
+    top:445px;
+    left:530px;
+    position:absolute;
+    z-index:7;
+}
+#d5{
+    width:60px;
+    height:23px;
+    top:445px;
+    left:590px;
+    position:absolute;
+    z-index:30;
+}
+#hidden{
+    height: 260px;
+    width: 530px;
+    top:200px;
+    left:300px;
+    overflow:hidden;
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity:0;
+    z-index:10;
+  }
+
+</style>
+<body>
+<iframe id="hidden"  src="" scrolling="no"></iframe>
+<div class="dd" id="d1"><video src="BigBuckBunny.mp4"  controls="controls" preload="auto" ></div>
+<div class="dd" id="d2"></div>
+<div class="dd" id="d3"></div>
+<div id="d4"><button id="button_1">Next</button></div>
+<div id="d5"><button id="button_1" onclick="alert('Please Wait')">Replay </button></div>
+</body>
+</html>

